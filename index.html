@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cutest Girl in the World - Happy Birthday DeSsert! 💕</title>
+    <meta name="description" content="A romantic birthday website dedicated to the cutest girl in the world - Happy Birthday DeSsert! Interactive quiz, memory gallery, and special surprises await!">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce7f3, #f3e8ff, #e0e7ff);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-caveat {
+            font-family: 'Caveat', cursive;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b9d, #8b5cf6, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .heart-float {
+            position: fixed;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: float 4s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .animate-heart-float {
+            animation: heartFloat 4s ease-in-out forwards;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .section.active {
+            display: flex;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #374151;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
+            color: white;
+            padding: 16px 48px;
+            border-radius: 25px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #d81b60, #8e24aa);
+        }
+
+        .btn-purple {
+            background: linear-gradient(45deg, #8b5cf6, #a855f7);
+        }
+
+        .btn-purple:hover {
+            background: linear-gradient(45deg, #7c3aed, #9333ea);
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, #f59e0b, #e91e63);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(45deg, #d97706, #d81b60);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 8px solid white;
+            object-fit: cover;
+            margin: 0 auto 3rem;
+        }
+
+        .birthday-img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin-bottom: 3rem;
+        }
+
+        .quiz-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #e5e7eb;
+            border-radius: 25px;
+            height: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #e91e63, #8b5cf6);
+            border-radius: 25px;
+            transition: width 0.5s ease;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            color: #374151;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e91e63;
+            color: white;
+            border-color: #e91e63;
+            transform: scale(1.05);
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            color: #10b981;
+        }
+
+        .feedback.incorrect {
+            color: #ef4444;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.2);
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: heartFloat 4s ease-in-out forwards;
+        }
+
+        /* Memory Palace Styles */
+        .palace-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 0.5rem;
+        }
+
+        .palace-nav-btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .palace-nav-btn.active {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .palace-nav-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 256px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: end;
+            padding: 1rem;
+            color: white;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .note-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .note-card:hover {
+            transform: scale(1.05);
+        }
+
+        .milestones-container {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .milestone-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .dreams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .dream-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 12px 32px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Static floating hearts decoration -->
+    <div class="heart-float" style="top: 10%; left: 10%; animation-delay: 0s;">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="heart-float" style="top: 20%; right: 15%; animation-delay: 1s;">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="heart-float" style="top: 70%; left: 20%; animation-delay: 2s;">
+        <i class="fas fa-heart"></i>
+    </div>
+    <div class="heart-float" style="top: 60%; right: 10%; animation-delay: 3s;">
+        <i class="fas fa-heart"></i>
+    </div>
+
+    <!-- Floating hearts container for celebrations -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Hero Section -->
+    <section class="section active" id="hero">
+        <div style="position: absolute; inset: 0; background: linear-gradient(45deg, rgba(255, 107, 157, 0.2), rgba(139, 92, 246, 0.2), rgba(255, 217, 61, 0.2));"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="animate-fade-in">
+                <h1 class="font-dancing gradient-text" style="font-size: 4rem; font-weight: bold; margin-bottom: 2rem; animation: pulse 2s infinite;">
+                    Dedicated to the
+                </h1>
+                <h2 class="font-dancing" style="font-size: 3rem; font-weight: bold; color: #e91e63; margin-bottom: 3rem; animation: bounce 2s infinite;">
+                    Cutest Girl in This World
+                </h2>
+                
+                <div style="margin-bottom: 3rem;" class="animate-float">
+                    <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
+                         alt="Beautiful couple moment" 
+                         class="profile-img">
+                </div>
+                
+                <button class="btn" onclick="showSection('birthday')">
+                    <i class="fas fa-gift" style="margin-right: 12px;"></i>Continue to Birthday Message
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Birthday Section -->
+    <section class="section" id="birthday">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 217, 61, 0.3), rgba(255, 107, 157, 0.3), rgba(139, 92, 246, 0.3));"></div>
+        <button class="back-btn" onclick="showSection('hero')">
+            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>Back
+        </button>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div class="animate-slide-up">
+                <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                     alt="Birthday celebration with balloons and cake" 
+                     class="birthday-img">
+                
+                <h1 class="font-dancing gradient-text" style="font-size: 5rem; font-weight: bold; margin-bottom: 2rem;">
+                    Happy Birthday
+                </h1>
+                <h2 class="font-caveat" style="font-size: 3rem; color: #e91e63; margin-bottom: 2rem;">
+                    to my cute little
+                </h2>
+                <h3 class="font-dancing" style="font-size: 4rem; font-weight: bold; color: #8b5cf6; margin-bottom: 3rem; animation: bounce 2s infinite;">
+                    DeSsert 🍰
+                </h3>
+                
+                <div style="margin-bottom: 3rem;">
+                    <p style="font-size: 1.5rem; color: #374151; max-width: 768px; margin: 0 auto; line-height: 1.6;">
+                        Today is all about celebrating the most amazing person in my world. 
+                        You bring sweetness to every moment, just like your name suggests! 💕
+                    </p>
+                </div>
+                
+                <button class="btn btn-purple" onclick="showSection('gameIntro')">
+                    <i class="fas fa-gamepad" style="margin-right: 12px;"></i>Let's Play a Special Game!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Intro Section -->
+    <section class="section" id="gameIntro">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(255, 107, 157, 0.2), rgba(255, 217, 61, 0.2));"></div>
+        <button class="back-btn" onclick="showSection('birthday')">
+            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>Back
+        </button>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h1 class="font-dancing gradient-text" style="font-size: 4rem; font-weight: bold; margin-bottom: 2rem;">
+                    Our Love Quiz 💕
+                </h1>
+                
+                <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300" 
+                         alt="Cute heart-shaped decorations and romantic elements" 
+                         style="width: 384px; height: 256px; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); object-fit: cover;">
+                </div>
+                
+                <div class="glass-effect" style="border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem;">
+                    <h2 class="font-caveat" style="font-size: 2rem; color: #e91e63; margin-bottom: 1.5rem;">
+                        How well do you know our story? 🌟
+                    </h2>
+                    <p style="font-size: 1.25rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">
+                        I've prepared 10 special questions about our beautiful journey together. 
+                        Answer them correctly, and the first letter of each answer will form a secret password!
+                    </p>
+                    <p style="font-size: 1.125rem; color: #8b5cf6; font-weight: 600; margin-bottom: 1.5rem;">
+                        This password will unlock a very special portal filled with our precious memories! 🗝️✨
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; font-size: 1.5rem;">
+                        <i class="fas fa-heart" style="color: #e91e63; animation: pulse 2s infinite;"></i>
+                        <i class="fas fa-star" style="color: #f59e0b; animation: pulse 2s infinite;"></i>
+                        <i class="fas fa-heart" style="color: #8b5cf6; animation: pulse 2s infinite;"></i>
+                    </div>
+                </div>
+                
+                <button class="btn btn-gold" onclick="startQuiz()">
+                    <i class="fas fa-play" style="margin-right: 12px;"></i>Start Our Quiz!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="section" id="quiz">
+        <button class="back-btn" onclick="showSection('gameIntro')">
+            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>Back
+        </button>
+        <div class="quiz-container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 class="font-dancing gradient-text" style="font-size: 3rem; font-weight: bold; margin-bottom: 1rem;">
+                    Love Quiz Challenge 💝
+                </h1>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <span style="font-size: 1.125rem; font-weight: 600; color: #6b7280;">Question</span>
+                    <span id="currentQuestionNum" style="font-size: 1.5rem; font-weight: bold; color: #e91e63;">1</span>
+                    <span style="font-size: 1.125rem; font-weight: 600; color: #6b7280;">of 10</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill" style="width: 10%;"></div>
+                </div>
+            </div>
+
+            <div class="glass-effect" style="border-radius: 1.5rem; padding: 2rem; transition: all 0.3s ease;">
+                <h2 id="questionText" class="font-caveat" style="font-size: 1.5rem; color: #e91e63; margin-bottom: 2rem;">
+                    What was the first movie we watched together?
+                </h2>
+                <div id="quizOptions" class="quiz-options">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+                
+                <div id="feedback" class="feedback" style="display: none;"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Password letters collected:</p>
+                <div id="collectedPassword" style="font-size: 1.5rem; font-weight: bold; color: #8b5cf6; letter-spacing: 0.1em; min-height: 2rem;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Password Reveal Section -->
+    <section class="section" id="passwordReveal">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 217, 61, 0.3), rgba(255, 107, 157, 0.3), rgba(139, 92, 246, 0.3));"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="max-width: 768px; margin: 0 auto;">
+                <h1 class="font-dancing gradient-text" style="font-size: 4rem; font-weight: bold; margin-bottom: 2rem; animation: pulse 2s infinite;">
+                    Congratulations! 🎉
+                </h1>
+                
+                <div class="glass-effect" style="border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem;">
+                    <h2 class="font-caveat" style="font-size: 2rem; color: #e91e63; margin-bottom: 1.5rem;">
+                        You've unlocked the secret password!
+                    </h2>
+                    <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); margin-bottom: 1.5rem;">
+                        <p style="font-size: 1.125rem; color: #6b7280; margin-bottom: 1rem;">Your magic password is:</p>
+                        <div id="finalPassword" class="gradient-text" style="font-size: 2.5rem; font-weight: bold; letter-spacing: 0.1em;">
+                            ABCDERTYBS
+                        </div>
+                    </div>
+                    <p style="font-size: 1.125rem; color: #374151; margin-bottom: 1.5rem;">
+                        This password will take you to our special "Memory Palace" - 
+                        a magical place filled with all our beautiful moments together! 💕
+                    </p>
+                </div>
+                
+                <button class="btn btn-purple" onclick="showSection('passwordEntry')">
+                    <i class="fas fa-key" style="margin-right: 12px;"></i>Enter Memory Palace
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Password Entry Section -->
+    <section class="section" id="passwordEntry">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(139, 92, 246, 0.2), rgba(255, 217, 61, 0.2));"></div>
+        <div class="container" style="position: relative; z-index: 10;">
+            <div style="max-width: 512px; margin: 0 auto;">
+                <h1 class="font-dancing gradient-text" style="font-size: 3rem; font-weight: bold; margin-bottom: 2rem;">
+                    Welcome to the Memory Palace 🏰
+                </h1>
+                
+                <div class="glass-effect" style="border-radius: 1.5rem; padding: 2rem; margin-bottom: 2rem;">
+                    <h2 class="font-caveat" style="font-size: 1.5rem; color: #e91e63; margin-bottom: 1.5rem;">
+                        Enter your secret password to unlock our treasure trove of memories!
+                    </h2>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <input type="password" 
+                               id="passwordInput"
+                               class="password-input"
+                               placeholder="Enter your password..."
+                               onkeypress="if(event.key==='Enter') checkPassword()">
+                    </div>
+                    
+                    <button class="btn" onclick="checkPassword()">
+                        <i class="fas fa-unlock" style="margin-right: 12px;"></i>Unlock Portal
+                    </button>
+                    
+                    <div id="passwordError" style="margin-top: 1rem; color: #ef4444; font-weight: 600; display: none;">
+                        Oops! That's not quite right. Try again! 💕
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Palace Section -->
+    <section class="section" id="memoryPalace">
+        <button class="back-btn" onclick="showSection('passwordEntry')">
+            <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>Back to Portal
+        </button>
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 class="font-dancing gradient-text" style="font-size: 4rem; font-weight: bold; margin-bottom: 1rem;">
+                    Our Memory Palace 🏰✨
+                </h1>
+                <p style="font-size: 1.25rem; color: #374151; max-width: 768px; margin: 0 auto;">
+                    Welcome to our special place filled with all the beautiful moments we've shared together.
+                    Every photo, every memory, every smile - they're all here, safe and sound! 💕
+                </p>
+            </div>
+
+            <!-- Navigation Menu -->
+            <div style="display: flex; justify-content: center; margin-bottom: 3rem;">
+                <div class="palace-nav">
+                    <button class="palace-nav-btn active" style="background: #e91e63;" onclick="showPalaceSection('gallery')">
+                        <i class="fas fa-images" style="margin-right: 8px;"></i>Photo Gallery
+                    </button>
+                    <button class="palace-nav-btn" style="background: #8b5cf6;" onclick="showPalaceSection('loveNotes')">
+                        <i class="fas fa-heart" style="margin-right: 8px;"></i>Love Notes
+                    </button>
+                    <button class="palace-nav-btn" style="background: #f59e0b;" onclick="showPalaceSection('milestones')">
+                        <i class="fas fa-star" style="margin-right: 8px;"></i>Our Milestones
+                    </button>
+                    <button class="palace-nav-btn" style="background: #a855f7;" onclick="showPalaceSection('dreams')">
+                        <i class="fas fa-gift" style="margin-right: 8px;"></i>Dream List
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div id="gallerySection" class="palace-content">
+                <h2 class="font-dancing" style="font-size: 2.5rem; font-weight: bold; color: #e91e63; text-align: center; margin-bottom: 2rem;">
+                    Our Beautiful Moments 📸
+                </h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Our First Date">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Our First Date</p>
+                                <p style="font-size: 0.875rem;">The day everything started ✨</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Coffee Adventures">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Coffee Adventures</p>
+                                <p style="font-size: 0.875rem;">Laughing until our hearts hurt 😂</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Perfect Moments">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Perfect Moments</p>
+                                <p style="font-size: 0.875rem;">When time stands still 💕</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Beach Walks">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Beach Walks</p>
+                                <p style="font-size: 0.875rem;">Footprints in the sand 🏖️</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Romantic Dinners">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Romantic Dinners</p>
+                                <p style="font-size: 0.875rem;">Candlelit conversations 🕯️</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600" class="gallery-img" alt="Adventures">
+                        <div class="gallery-overlay">
+                            <div>
+                                <p style="font-weight: 600;">Adventures</p>
+                                <p style="font-size: 0.875rem;">Making memories everywhere 🌟</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Love Notes Section -->
+            <div id="loveNotesSection" class="palace-content" style="display: none;">
+                <h2 class="font-dancing" style="font-size: 2.5rem; font-weight: bold; color: #e91e63; text-align: center; margin-bottom: 2rem;">
+                    Love Notes from My Heart 💌
+                </h2>
+                <div class="notes-grid">
+                    <div class="note-card">
+                        <div style="font-size: 1.875rem; margin-bottom: 1rem;">💕</div>
+                        <p style="font-size: 1.125rem; color: #374151; font-style: italic; margin-bottom: 1rem;">
+                            "Every day with you feels like a beautiful dream that I never want to wake up from. You make the ordinary moments extraordinary just by being you."
+                        </p>
+                        <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">- Your Love</p>
+                    </div>
+                    <div class="note-card">
+                        <div style="font-size: 1.875rem; margin-bottom: 1rem;">🌟</div>
+                        <p style="font-size: 1.125rem; color: #374151; font-style: italic; margin-bottom: 1rem;">
+                            "Your smile is my favorite sunrise, your laugh is my favorite song, and your love is my favorite story to live every day."
+                        </p>
+                        <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">- Forever Yours</p>
+                    </div>
+                    <div class="note-card">
+                        <div style="font-size: 1.875rem; margin-bottom: 1rem;">🦋</div>
+                        <p style="font-size: 1.125rem; color: #374151; font-style: italic; margin-bottom: 1rem;">
+                            "In a world full of chaos, you are my peace. In a world full of doubt, you are my certainty. You are my always and forever."
+                        </p>
+                        <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">- With All My Love</p>
+                    </div>
+                    <div class="note-card">
+                        <div style="font-size: 1.875rem; margin-bottom: 1rem;">🌈</div>
+                        <p style="font-size: 1.125rem; color: #374151; font-style: italic; margin-bottom: 1rem;">
+                            "Thank you for being the reason I believe in love, the reason I smile every day, and the reason my heart feels complete."
+                        </p>
+                        <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">- Your Biggest Fan</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestones Section -->
+            <div id="milestonesSection" class="palace-content" style="display: none;">
+                <h2 class="font-dancing" style="font-size: 2.5rem; font-weight: bold; color: #e91e63; text-align: center; margin-bottom: 2rem;">
+                    Our Beautiful Journey 🌟
+                </h2>
+                <div class="milestones-container">
+                    <div class="milestone">
+                        <div class="milestone-icon" style="background: #e91e63;">💕</div>
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937;">First "I Love You"</h3>
+                            <p style="color: #6b7280;">The moment our hearts officially belonged to each other</p>
+                            <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">March 15, 2023</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon" style="background: #8b5cf6;">🎂</div>
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937;">Your Birthday Surprise</h3>
+                            <p style="color: #6b7280;">When I saw your happy tears, I knew I'd do anything to see that smile</p>
+                            <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">July 12, 2023</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon" style="background: #f59e0b;">🏠</div>
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937;">Our First Trip Together</h3>
+                            <p style="color: #6b7280;">Creating memories in a new place, just you and me</p>
+                            <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">September 22, 2023</p>
+                        </div>
+                    </div>
+                    <div class="milestone">
+                        <div class="milestone-icon" style="background: #a855f7;">🌟</div>
+                        <div>
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937;">Today - Your Special Day</h3>
+                            <p style="color: #6b7280;">Celebrating the most wonderful person in my world</p>
+                            <p style="font-size: 0.875rem; color: #e91e63; font-weight: 600;">Today ✨</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dreams Section -->
+            <div id="dreamsSection" class="palace-content" style="display: none;">
+                <h2 class="font-dancing" style="font-size: 2.5rem; font-weight: bold; color: #e91e63; text-align: center; margin-bottom: 2rem;">
+                    Our Dream Adventures 🌈
+                </h2>
+                <div class="dreams-grid">
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🗼</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Paris Adventure</h3>
+                        <p style="color: #6b7280;">Walking hand in hand by the Eiffel Tower, sharing croissants and dreams</p>
+                    </div>
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏖️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Beach Getaway</h3>
+                        <p style="color: #6b7280;">Sunset walks on the beach, building sandcastles and making wishes</p>
+                    </div>
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏔️</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Mountain Retreat</h3>
+                        <p style="color: #6b7280;">Cozy cabin nights, stargazing, and hot chocolate by the fireplace</p>
+                    </div>
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎡</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Amusement Park Fun</h3>
+                        <p style="color: #6b7280;">Screaming on roller coasters and winning you stuffed animals</p>
+                    </div>
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🍳</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Cooking Classes</h3>
+                        <p style="color: #6b7280;">Learning to make your favorite dishes together (and probably burning a few!)</p>
+                    </div>
+                    <div class="dream-card">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏡</div>
+                        <h3 style="font-size: 1.25rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Our Dream Home</h3>
+                        <p style="color: #6b7280;">A cozy place filled with laughter, love, and all our favorite things</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What was the first movie we watched together?",
+                options: ["Avatar", "Titanic", "Inception", "The Notebook"],
+                answer: "Avatar"
+            },
+            {
+                question: "What's my favorite dessert that you make?",
+                options: ["Brownies", "Chocolate Cake", "Ice Cream", "Cookies"],
+                answer: "Brownies"
+            },
+            {
+                question: "Where did we have our first date?",
+                options: ["Coffee Shop", "Restaurant", "Park", "Cinema"],
+                answer: "Coffee Shop"
+            },
+            {
+                question: "What's the pet name I call you most often?",
+                options: ["Darling", "Sweetheart", "Baby", "Angel"],
+                answer: "Darling"
+            },
+            {
+                question: "What's my favorite color that you wear?",
+                options: ["Blue", "Red", "Purple", "Green"],
+                answer: "Blue"
+            },
+            {
+                question: "What song makes me think of you?",
+                options: ["Perfect", "Thinking Out Loud", "All of Me", "Enchanted"],
+                answer: "Enchanted"
+            },
+            {
+                question: "What's our favorite activity together?",
+                options: ["Cooking", "Reading", "Dancing", "Gaming"],
+                answer: "Reading"
+            },
+            {
+                question: "What time of day do I love spending with you most?",
+                options: ["Morning", "Afternoon", "Evening", "Night"],
+                answer: "Evening"
+            },
+            {
+                question: "What's the first gift I ever gave you?",
+                options: ["Flowers", "Book", "Necklace", "Teddy Bear"],
+                answer: "Teddy Bear"
+            },
+            {
+                question: "What do I love most about your personality?",
+                options: ["Your humor", "Your kindness", "Your intelligence", "Your smile"],
+                answer: "Your smile"
+            }
+        ];
+
+        // Game state
+        let currentQuestion = 0;
+        let collectedPassword = "";
+        let finalPassword = "";
+
+        // Navigation functions
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Quiz functions
+        function startQuiz() {
+            currentQuestion = 0;
+            collectedPassword = "";
+            updateQuizDisplay();
+            showSection('quiz');
+        }
+
+        function updateQuizDisplay() {
+            const question = quizData[currentQuestion];
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            
+            document.getElementById('currentQuestionNum').textContent = currentQuestion + 1;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('collectedPassword').textContent = collectedPassword;
+            
+            // Update options
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option';
+                button.textContent = option;
+                button.onclick = () => handleAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+            
+            // Hide feedback
+            document.getElementById('feedback').style.display = 'none';
+        }
+
+        function handleAnswer(selectedAnswer) {
+            const correct = quizData[currentQuestion].answer;
+            const isCorrect = selectedAnswer === correct;
+            const feedback = document.getElementById('feedback');
+            
+            feedback.style.display = 'block';
+            
+            if (isCorrect) {
+                feedback.textContent = '✨ Correct! ✨';
+                feedback.className = 'feedback correct';
+                
+                const firstLetter = correct.charAt(0).toUpperCase();
+                collectedPassword += firstLetter;
+                document.getElementById('collectedPassword').textContent = collectedPassword;
+                
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                    
+                    if (currentQuestion + 1 < quizData.length) {
+                        currentQuestion++;
+                        updateQuizDisplay();
+                    } else {
+                        finalPassword = collectedPassword;
+                        document.getElementById('finalPassword').textContent = finalPassword;
+                        showSection('passwordReveal');
+                    }
+                }, 1500);
+            } else {
+                feedback.textContent = '💕 Try again, my love! 💕';
+                feedback.className = 'feedback incorrect';
+                
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 1500);
+            }
+        }
+
+        // Password check function
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value.toUpperCase();
+            const error = document.getElementById('passwordError');
+            
+            if (input === finalPassword) {
+                createFloatingHearts();
+                showSection('memoryPalace');
+                document.getElementById('passwordInput').value = '';
+                error.style.display = 'none';
+            } else {
+                error.style.display = 'block';
+                setTimeout(() => {
+                    error.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Memory Palace navigation
+        function showPalaceSection(sectionName) {
+            // Hide all palace content
+            const contents = document.querySelectorAll('.palace-content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove active class from all nav buttons
+            const navButtons = document.querySelectorAll('.palace-nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected content and activate button
+            const sectionMap = {
+                'gallery': 'gallerySection',
+                'loveNotes': 'loveNotesSection',
+                'milestones': 'milestonesSection',
+                'dreams': 'dreamsSection'
+            };
+            
+            document.getElementById(sectionMap[sectionName]).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Floating hearts animation
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart animate-heart-float';
+                    heart.textContent = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.bottom = '-50px';
+                    heart.style.animationDelay = (i * 200) + 'ms';
+                    
+                    container.appendChild(heart);
+                    
+                    // Remove heart after animation
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 4000);
+                }, i * 200);
+            }
+        }
+
+        // Initialize quiz display when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateQuizDisplay();
+        });
+    </script>
+</body>
+</html>
